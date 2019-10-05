@@ -11,23 +11,23 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SOURCE_STAGE"
   DTS:PackageType="5"
-  DTS:VersionBuild="43"
-  DTS:VersionGUID="{FEA3B70D-B6F6-4584-9BEE-8955657C1CC4}">
+  DTS:VersionBuild="49"
+  DTS:VersionGUID="{F67F86A2-B690-455A-825B-25843D677EA0}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
     <DTS:ConnectionManager
-      DTS:refId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+      DTS:refId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
       DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
       DTS:DTSID="{AB4F4D3D-D239-4602-85A6-C94ADF8704BA}"
-      DTS:ObjectName="192.168.0.3.bdkdosh2018.root">
+      DTS:ObjectName="192.168.0.3.bdkdosh2018.root SOURCE">
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="server=192.168.0.3;user id=root;port=2011;database=bdkdosh2018;">
           <DTS:Password
             DTS:Name="password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6RqvxJAPakaEdM3YckaClAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABw9sQNudURR3Y2GhBeCcifm6lqocNF5S9nAQ0/yfRsYQAAAAAOgAAAAAIAACAAAACzbdeZS6chTPMBLwhDOkYemlwhLEzzBNSt3gI6JxBLARAAAAA9FArot1/kPt+URhDSfdQqQAAAAL+jHO3lmV51cAmpvQUzzMccPWvU5jtxNodPE65KZbxviv2KZ+/XNBlVebomR6Eess18hdqhCUSDwVCQubbeOxE</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6RqvxJAPakaEdM3YckaClAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC7DYTdxpLoK4WNFMFJOMzjyGKVROVQGmgFe1/w1P/5QwAAAAAOgAAAAAIAACAAAADHCOUVlepZMztkcs3wQgfgFLOVYCR1UcUSNbz264thFRAAAABrvmjWVwxj4bkVDJyBNTTeQAAAAIZoUootoAM3hVDst6caiSMAuT742hlIvFjABVby7Eu+mPzdGxj52Ul+oMk2n8vZWDntjHb6wgLhz1JcK2C4WgU</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -78,13 +78,16 @@
     numdoc,
     tipmov,
     fecdoc,
+    (YEAR(fecdoc) * 10000 + MONTH(fecdoc) * 100 + DAY(fecdoc)) AS 'SK_FECHA',
     hordoc,
+    if(hordoc = '', -1 , CAST(substr(hordoc, 1, 2) AS UNSIGNED) * 10000 + CAST(substr(hordoc, 4, 2) AS UNSIGNED) * 100 + CAST(substr(hordoc, 7, 2) AS UNSIGNED)) AS 'SK_HORA',
     preart,
     totart,
     canart
 FROM movdet
-WHERE fecdoc &lt;&gt; '0000-00-00'
-ORDER BY codart;</property>
+WHERE
+      fecdoc &lt;&gt; '0000-00-00'
+ORDER BY codart</property>
                 <property
                   dataType="System.Int32"
                   description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
@@ -111,8 +114,8 @@ ORDER BY codart;</property>
               <connections>
                 <connection
                   refId="Package\Cargar - TIPMOV\ADO NET Source.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
-                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -169,6 +172,15 @@ ORDER BY codart;</property>
                       name="fecdoc"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_FECHA]"
+                      dataType="ui8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SK_FECHA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_FECHA]"
+                      name="SK_FECHA"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
@@ -177,6 +189,16 @@ ORDER BY codart;</property>
                       length="8"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]"
                       name="hordoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_HORA]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SK_HORA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_HORA]"
+                      name="SK_HORA"
+                      precision="9"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]"
@@ -236,10 +258,19 @@ ORDER BY codart;</property>
                       dataType="dbTimeStamp"
                       name="fecdoc" />
                     <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SK_FECHA]"
+                      dataType="ui8"
+                      name="SK_FECHA" />
+                    <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[hordoc]"
                       dataType="wstr"
                       length="8"
                       name="hordoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SK_HORA]"
+                      dataType="numeric"
+                      name="SK_HORA"
+                      precision="9" />
                     <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[preart]"
                       dataType="numeric"
@@ -292,11 +323,22 @@ ORDER BY codart;</property>
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[fecdoc]"
                       name="fecdoc" />
                     <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SK_FECHA]"
+                      dataType="ui8"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SK_FECHA]"
+                      name="SK_FECHA" />
+                    <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[hordoc]"
                       dataType="wstr"
                       length="8"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[hordoc]"
                       name="hordoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SK_HORA]"
+                      dataType="numeric"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SK_HORA]"
+                      name="SK_HORA"
+                      precision="9" />
                     <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[preart]"
                       dataType="numeric"
@@ -620,6 +662,19 @@ ORDER BY codart;</property>
                       cachedPrecision="8"
                       externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CANART]"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[canart]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SK_FECHA]"
+                      cachedDataType="ui8"
+                      cachedName="SK_FECHA"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_FECHA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_FECHA]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SK_HORA]"
+                      cachedDataType="numeric"
+                      cachedName="SK_HORA"
+                      cachedPrecision="9"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_HORA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_HORA]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -662,6 +717,14 @@ ORDER BY codart;</property>
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CANART]"
                       dataType="i4"
                       name="CANART" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_FECHA]"
+                      dataType="i4"
+                      name="SK_FECHA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_HORA]"
+                      dataType="i4"
+                      name="SK_HORA" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -772,8 +835,8 @@ FROM maepro;</property>
               <connections>
                 <connection
                   refId="Package\Cargar D_CLIENTE\ADO NET Source.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
-                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -1330,8 +1393,8 @@ JOIN maeubi u
               <connections>
                 <connection
                   refId="Package\Cargar D_PRODUCTO\ADO NET Source.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
-                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2070,8 +2133,8 @@ FROM maeprov;</property>
               <connections>
                 <connection
                   refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Connections[IDbConnection]"
-                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
-                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root SOURCE]"
                   description="Managed connection manager"
                   name="IDbConnection" />
               </connections>
@@ -2627,26 +2690,26 @@ FROM maeprov;</property>
         <NodeLayout
           Size="159,42"
           Id="Package\Cargar - TIPMOV"
-          TopLeft="137,146" />
+          TopLeft="109,160" />
         <NodeLayout
           Size="168,42"
           Id="Package\Cargar D_CLIENTE"
-          TopLeft="333,148" />
+          TopLeft="305,162" />
         <NodeLayout
           Size="181,42"
           Id="Package\Cargar D_PRODUCTO"
-          TopLeft="786,149" />
+          TopLeft="758,163" />
         <NodeLayout
           Size="186,42"
           Id="Package\Cargar D_PROVEEDOR"
-          TopLeft="561,151" />
+          TopLeft="533,165" />
         <NodeLayout
           Size="163,42"
           Id="Package\Execute SQL Task"
-          TopLeft="484,27" />
+          TopLeft="456,41" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="519,69">
+          TopLeft="491,83">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2680,7 +2743,7 @@ FROM maeprov;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="550,69">
+          TopLeft="522,83">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2714,7 +2777,7 @@ FROM maeprov;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="581,69">
+          TopLeft="553,83">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2748,7 +2811,7 @@ FROM maeprov;</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="612,69">
+          TopLeft="584,83">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
@@ -2789,31 +2852,35 @@ FROM maeprov;</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="158,42"
-          Id="Package\Cargar - TIPMOV\ADO NET Source"
-          TopLeft="392,52" />
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Cargar - TIPMOV\OLE DB Destination"
-          TopLeft="379,269" />
-        <NodeLayout
           Size="156,42"
           Id="Package\Cargar - TIPMOV\Data Conversion"
           TopLeft="392,123" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar - TIPMOV\OLE DB Destination"
+          TopLeft="384,269" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Cargar - TIPMOV\Derived Column"
+          TopLeft="395,195" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar - TIPMOV\ADO NET Source"
+          TopLeft="392,52" />
         <EdgeLayout
-          Id="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
-          TopLeft="470.5,94">
+          Id="Package\Cargar - TIPMOV.Paths[Derived Column Output]"
+          TopLeft="470.75,237">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,29"
+              EndConnector="0,32"
               Start="0,0"
-              End="0,21.5">
+              End="0,24.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.5" />
+                    End="0,24.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2822,10 +2889,6 @@ FROM maeprov;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <NodeLayout
-          Size="154,42"
-          Id="Package\Cargar - TIPMOV\Derived Column"
-          TopLeft="395,195" />
         <EdgeLayout
           Id="Package\Cargar - TIPMOV.Paths[Data Conversion Output]"
           TopLeft="471,165">
@@ -2849,19 +2912,19 @@ FROM maeprov;</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Cargar - TIPMOV.Paths[Derived Column Output]"
-          TopLeft="468.25,237">
+          Id="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
+          TopLeft="470.5,94">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32"
+              EndConnector="0,29"
               Start="0,0"
-              End="0,24.5">
+              End="0,21.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.5" />
+                    End="0,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2873,14 +2936,6 @@ FROM maeprov;</property>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
-  <PipelineComponentMetadata
-    design-time-name="Package\Cargar - TIPMOV\ADO NET Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
   <PipelineComponentMetadata
     design-time-name="Package\Cargar - TIPMOV\OLE DB Destination">
     <Properties>
@@ -2894,45 +2949,31 @@ FROM maeprov;</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar - TIPMOV\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Cargar D_CLIENTE">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Cargar D_CLIENTE\ADO NET Source"
-          TopLeft="332,45" />
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="171,42"
           Id="Package\Cargar D_CLIENTE\OLE DB Destination"
           TopLeft="324.5,237.5" />
         <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar D_CLIENTE\ADO NET Source"
+          TopLeft="332,45" />
+        <NodeLayout
           Size="156,42"
           Id="Package\Cargar D_CLIENTE\Data Conversion"
           TopLeft="328,139" />
-        <EdgeLayout
-          Id="Package\Cargar D_CLIENTE.Paths[ADO NET Source Output]"
-          TopLeft="408.5,87">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,52"
-              Start="0,0"
-              End="0,44.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,44.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Cargar D_CLIENTE.Paths[Data Conversion Output]"
           TopLeft="408,181">
@@ -2952,51 +2993,76 @@ FROM maeprov;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar D_CLIENTE.Paths[ADO NET Source Output]"
+          TopLeft="408.5,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_CLIENTE\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_CLIENTE\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Cargar D_PRODUCTO">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="158,42"
-          Id="Package\Cargar D_PRODUCTO\ADO NET Source"
-          TopLeft="410,32" />
+          Size="171,42"
+          Id="Package\Cargar D_PRODUCTO\OLE DB Destination"
+          TopLeft="407,240" />
         <NodeLayout
           Size="156,42"
           Id="Package\Cargar D_PRODUCTO\Data Conversion"
           TopLeft="417,134" />
-        <EdgeLayout
-          Id="Package\Cargar D_PRODUCTO.Paths[ADO NET Source Output]"
-          TopLeft="492,74">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,60"
-              Start="0,0"
-              End="0,52.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,52.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <NodeLayout
-          Size="171,42"
-          Id="Package\Cargar D_PRODUCTO\OLE DB Destination"
-          TopLeft="407,240" />
+          Size="158,42"
+          Id="Package\Cargar D_PRODUCTO\ADO NET Source"
+          TopLeft="410,32" />
         <EdgeLayout
           Id="Package\Cargar D_PRODUCTO.Paths[Data Conversion Output]"
           TopLeft="493.75,176">
@@ -3019,62 +3085,20 @@ FROM maeprov;</property>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\Cargar D_PROVEEDOR">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="158,42"
-          Id="Package\Cargar D_PROVEEDOR\ADO NET Source"
-          TopLeft="360,54" />
-        <NodeLayout
-          Size="156,42"
-          Id="Package\Cargar D_PROVEEDOR\Data Conversion"
-          TopLeft="359,154" />
         <EdgeLayout
-          Id="Package\Cargar D_PROVEEDOR.Paths[ADO NET Source Output]"
-          TopLeft="438,96">
+          Id="Package\Cargar D_PRODUCTO.Paths[ADO NET Source Output]"
+          TopLeft="492,74">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,58"
+              EndConnector="0,60"
               Start="0,0"
-              End="0,50.5">
+              End="0,52.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,50.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="171,42"
-          Id="Package\Cargar D_PROVEEDOR\OLE DB Destination"
-          TopLeft="347,276" />
-        <EdgeLayout
-          Id="Package\Cargar D_PROVEEDOR.Paths[Data Conversion Output]"
-          TopLeft="434.75,196">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,80"
-              Start="0,0"
-              End="0,72.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,72.5" />
+                    End="0,52.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3087,36 +3111,7 @@ FROM maeprov;</property>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Cargar D_CLIENTE\ADO NET Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Cargar D_CLIENTE\OLE DB Destination">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Cargar D_PROVEEDOR\ADO NET Source">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Cargar D_PROVEEDOR\OLE DB Destination">
+    design-time-name="Package\Cargar D_PRODUCTO\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3136,8 +3131,76 @@ FROM maeprov;</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Cargar D_PROVEEDOR">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar D_PROVEEDOR\OLE DB Destination"
+          TopLeft="347,276" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar D_PROVEEDOR\ADO NET Source"
+          TopLeft="360,54" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Cargar D_PROVEEDOR\Data Conversion"
+          TopLeft="359,154" />
+        <EdgeLayout
+          Id="Package\Cargar D_PROVEEDOR.Paths[Data Conversion Output]"
+          TopLeft="434.75,196">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80"
+              Start="0,0"
+              End="0,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar D_PROVEEDOR.Paths[ADO NET Source Output]"
+          TopLeft="438,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Cargar D_PRODUCTO\OLE DB Destination">
+    design-time-name="Package\Cargar D_PROVEEDOR\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -3146,6 +3209,14 @@ FROM maeprov;</property>
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_PROVEEDOR\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
