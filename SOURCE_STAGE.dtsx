@@ -1,0 +1,3153 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/3/2019 5:02:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-ULE7DGO"
+  DTS:CreatorName="DESKTOP-ULE7DGO\admin"
+  DTS:DTSID="{FB16454D-55ED-4B1F-B2DE-BD22A2F45B23}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="13.0.2165.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SOURCE_STAGE"
+  DTS:PackageType="5"
+  DTS:VersionBuild="43"
+  DTS:VersionGUID="{FEA3B70D-B6F6-4584-9BEE-8955657C1CC4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+      DTS:CreationName="ADO.NET:MySql.Data.MySqlClient.MySqlConnection, MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d"
+      DTS:DTSID="{AB4F4D3D-D239-4602-85A6-C94ADF8704BA}"
+      DTS:ObjectName="192.168.0.3.bdkdosh2018.root">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="server=192.168.0.3;user id=root;port=2011;database=bdkdosh2018;">
+          <DTS:Password
+            DTS:Name="password"
+            Sensitive="1"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6RqvxJAPakaEdM3YckaClAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAABw9sQNudURR3Y2GhBeCcifm6lqocNF5S9nAQ0/yfRsYQAAAAAOgAAAAAIAACAAAACzbdeZS6chTPMBLwhDOkYemlwhLEzzBNSt3gI6JxBLARAAAAA9FArot1/kPt+URhDSfdQqQAAAAL+jHO3lmV51cAmpvQUzzMccPWvU5jtxNodPE65KZbxviv2KZ+/XNBlVebomR6Eess18hdqhCUSDwVCQubbeOxE</DTS:Password>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F225B40E-F401-4CEA-BB5D-F2A030426F89}"
+      DTS:ObjectName="localhost.KDOSH_STAGE">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=localhost;Initial Catalog=KDOSH_STAGE;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Cargar - TIPMOV"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CFA071DC-A9A1-4FE3-9394-E6D9ABEA3074}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar - TIPMOV"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar - TIPMOV\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    codart,
+    codper,
+    numdoc,
+    tipmov,
+    fecdoc,
+    hordoc,
+    preart,
+    totart,
+    canart
+FROM movdet
+WHERE fecdoc &lt;&gt; '0000-00-00'
+ORDER BY codart;</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar - TIPMOV\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codart]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]"
+                      name="codart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codper]"
+                      dataType="i8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codper]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codper]"
+                      name="codper"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
+                      length="10"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
+                      name="numdoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[tipmov]"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]"
+                      name="tipmov"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[fecdoc]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[fecdoc]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[fecdoc]"
+                      name="fecdoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[hordoc]"
+                      length="8"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]"
+                      name="hordoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[preart]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]"
+                      name="preart"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[totart]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[totart]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[totart]"
+                      name="totart"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[canart]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[canart]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[canart]"
+                      name="canart"
+                      precision="8"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codart]"
+                      dataType="i4"
+                      name="codart" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codper]"
+                      dataType="i8"
+                      name="codper" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
+                      dataType="wstr"
+                      length="10"
+                      name="numdoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[tipmov]"
+                      dataType="wstr"
+                      length="1"
+                      name="tipmov" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[fecdoc]"
+                      dataType="dbTimeStamp"
+                      name="fecdoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[hordoc]"
+                      dataType="wstr"
+                      length="8"
+                      name="hordoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[preart]"
+                      dataType="numeric"
+                      name="preart"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[totart]"
+                      dataType="numeric"
+                      name="totart"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[canart]"
+                      dataType="numeric"
+                      name="canart"
+                      precision="8" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codart]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codart]"
+                      name="codart" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codper]"
+                      dataType="i8"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codper]"
+                      name="codper" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
+                      name="numdoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipmov]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipmov]"
+                      name="tipmov" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[fecdoc]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[fecdoc]"
+                      name="fecdoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[hordoc]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[hordoc]"
+                      name="hordoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[preart]"
+                      dataType="numeric"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[preart]"
+                      name="preart"
+                      precision="8"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[totart]"
+                      dataType="numeric"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[totart]"
+                      name="totart"
+                      precision="8"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[canart]"
+                      dataType="numeric"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[canart]"
+                      name="canart"
+                      precision="8" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar - TIPMOV\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input].Columns[tipmov]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="tipmov"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipmov]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipmov]"
+                      name="DC_tipmov"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar - TIPMOV\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar - TIPMOV\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\Derived Column.Inputs[Derived Column Input].Columns[hordoc]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="hordoc"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Cargar - TIPMOV\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output].Columns[DC_hordoc]"
+                      dataType="dbTime"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output].Columns[DC_hordoc]"
+                      name="DC_hordoc"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_DBTIME)("1997-03-08" + " " + #{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[hordoc]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_DBTIME)("1997-03-08" + " " + hordoc)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Cargar - TIPMOV\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar - TIPMOV\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[TIPMOV]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar - TIPMOV\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codart]"
+                      cachedDataType="i4"
+                      cachedName="codart"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODART]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codper]"
+                      cachedDataType="i8"
+                      cachedName="codper"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CORPER]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[codper]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_tipmov]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="DC_tipmov"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPMOV]"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipmov]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[fecdoc]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="fecdoc"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FECHA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[fecdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_hordoc]"
+                      cachedDataType="dbTime"
+                      cachedName="DC_hordoc"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HORA]"
+                      lineageId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output].Columns[DC_hordoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[preart]"
+                      cachedDataType="numeric"
+                      cachedName="preart"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_COSTO]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[totart]"
+                      cachedDataType="numeric"
+                      cachedName="totart"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_VENTA]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[totart]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[canart]"
+                      cachedDataType="numeric"
+                      cachedName="canart"
+                      cachedPrecision="8"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CANART]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[canart]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODART]"
+                      dataType="i4"
+                      name="CODART" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CORPER]"
+                      dataType="i4"
+                      name="CORPER" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPMOV]"
+                      codePage="1252"
+                      dataType="str"
+                      length="5"
+                      name="TIPMOV" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FECHA]"
+                      dataType="dbDate"
+                      name="FECHA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HORA]"
+                      dataType="dbTime2"
+                      name="HORA"
+                      scale="7" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_COSTO]"
+                      dataType="numeric"
+                      name="PRECIO_COSTO"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_VENTA]"
+                      dataType="numeric"
+                      name="PRECIO_VENTA"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CANART]"
+                      dataType="i4"
+                      name="CANART" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar - TIPMOV\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar - TIPMOV\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
+              endId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Cargar - TIPMOV.Paths[Data Conversion Output]"
+              endId="Package\Cargar - TIPMOV\Derived Column.Inputs[Derived Column Input]"
+              name="Data Conversion Output"
+              startId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Cargar - TIPMOV.Paths[Derived Column Output]"
+              endId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Cargar D_CLIENTE"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{33E710EC-9FEA-4571-8A89-5D9F2E751356}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar D_CLIENTE"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar D_CLIENTE\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    codpro,
+    nompro,
+    dirpro,
+    dnipro,
+    telpro
+FROM maepro;</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_CLIENTE\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]"
+                      dataType="ui4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codpro]"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]"
+                      name="codpro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[nompro]"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]"
+                      name="nompro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dirpro]"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]"
+                      name="dirpro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dnipro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dnipro]"
+                      length="8"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dnipro]"
+                      name="dnipro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[telpro]"
+                      length="20"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]"
+                      name="telpro"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codpro]"
+                      dataType="ui4"
+                      name="codpro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[nompro]"
+                      dataType="wstr"
+                      length="100"
+                      name="nompro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dirpro]"
+                      dataType="wstr"
+                      length="100"
+                      name="dirpro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dnipro]"
+                      dataType="wstr"
+                      length="8"
+                      name="dnipro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[telpro]"
+                      dataType="wstr"
+                      length="20"
+                      name="telpro" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codpro]"
+                      dataType="ui4"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codpro]"
+                      name="codpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[nompro]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[nompro]"
+                      name="nompro" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dirpro]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dirpro]"
+                      name="dirpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dnipro]"
+                      dataType="wstr"
+                      length="8"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dnipro]"
+                      name="dnipro" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[telpro]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[telpro]"
+                      name="telpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_CLIENTE\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input].Columns[nompro]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="nompro"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input].Columns[dirpro]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="dirpro"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input].Columns[dnipro]"
+                      cachedDataType="wstr"
+                      cachedLength="8"
+                      cachedName="dnipro"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dnipro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input].Columns[telpro]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="telpro"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]"
+                      name="DC_nompro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]"
+                      name="DC_dirpro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dnipro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="8"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dnipro]"
+                      name="DC_dnipro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[dnipro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]"
+                      name="DC_telpro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_CLIENTE\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[D_CLIENTE]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_CLIENTE\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codpro]"
+                      cachedDataType="ui4"
+                      cachedName="codpro"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODPRO]"
+                      lineageId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_nompro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_nompro"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NOMBRE]"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_dirpro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_dirpro"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIRECCION]"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_dnipro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="8"
+                      cachedName="DC_dnipro"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DNI]"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dnipro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_telpro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DC_telpro"
+                      externalMetadataColumnId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TELEFONO]"
+                      lineageId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODPRO]"
+                      dataType="i4"
+                      name="CODPRO" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_CLIENTE]"
+                      dataType="i4"
+                      name="SK_CLIENTE" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NOMBRE]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="NOMBRE" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIRECCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DIRECCION" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DNI]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="DNI" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TELEFONO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="TELEFONO" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_CLIENTE\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_CLIENTE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_CLIENTE\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar D_CLIENTE.Paths[ADO NET Source Output]"
+              endId="Package\Cargar D_CLIENTE\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Cargar D_CLIENTE\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Cargar D_CLIENTE.Paths[Data Conversion Output]"
+              endId="Package\Cargar D_CLIENTE\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Cargar D_CLIENTE\Data Conversion.Outputs[Data Conversion Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Cargar D_PRODUCTO"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{0357495B-4403-49A1-905C-B9B707079FDA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar D_PRODUCTO"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar D_PRODUCTO\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    a.codart,
+    a.desmar,
+    a.desfam,
+    t.destip,
+    a.deslin,
+    a.talart,
+    a.desart,
+    u.desubi
+FROM maeart a
+JOIN maetip t
+    ON a.codtip = t.codtip
+JOIN maeubi u
+    ON a.codubi = u.codubi;</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_PRODUCTO\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]"
+                      dataType="ui4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codart]"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]"
+                      name="codart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desmar]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desmar]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desmar]"
+                      name="desmar"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desfam]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desfam]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desfam]"
+                      name="desfam"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[destip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[destip]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[destip]"
+                      name="destip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[deslin]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[deslin]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[deslin]"
+                      name="deslin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[talart]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[talart]"
+                      length="20"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[talart]"
+                      name="talart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desart]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desart]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desart]"
+                      name="desart"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desubi]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desubi]"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desubi]"
+                      name="desubi"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codart]"
+                      dataType="ui4"
+                      name="codart" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desmar]"
+                      dataType="wstr"
+                      length="100"
+                      name="desmar" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desfam]"
+                      dataType="wstr"
+                      length="100"
+                      name="desfam" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[destip]"
+                      dataType="wstr"
+                      length="100"
+                      name="destip" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[deslin]"
+                      dataType="wstr"
+                      length="100"
+                      name="deslin" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[talart]"
+                      dataType="wstr"
+                      length="20"
+                      name="talart" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desart]"
+                      dataType="wstr"
+                      length="100"
+                      name="desart" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[desubi]"
+                      dataType="wstr"
+                      length="100"
+                      name="desubi" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codart]"
+                      dataType="ui4"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codart]"
+                      name="codart" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desmar]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desmar]"
+                      name="desmar" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desfam]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desfam]"
+                      name="desfam" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[destip]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[destip]"
+                      name="destip" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[deslin]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[deslin]"
+                      name="deslin" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[talart]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[talart]"
+                      name="talart" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desart]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desart]"
+                      name="desart" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desubi]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[desubi]"
+                      name="desubi" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_PRODUCTO\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[desmar]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="desmar"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desmar]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[desfam]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="desfam"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desfam]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[destip]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="destip"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[destip]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[deslin]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="deslin"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[deslin]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[talart]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="talart"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[talart]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[desart]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="desart"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desart]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input].Columns[desubi]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="desubi"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desubi]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desmar]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desmar]"
+                      name="DC_desmar"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desmar]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desfam]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desfam]"
+                      name="DC_desfam"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desfam]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_destip]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_destip]"
+                      name="DC_destip"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[destip]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_deslin]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_deslin]"
+                      name="DC_deslin"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[deslin]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_talart]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_talart]"
+                      name="DC_talart"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[talart]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desart]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desart]"
+                      name="DC_desart"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desart]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desubi]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desubi]"
+                      name="DC_desubi"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[desubi]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_PRODUCTO\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[D_PRODUCTO]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codart]"
+                      cachedDataType="ui4"
+                      cachedName="codart"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODART]"
+                      lineageId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output].Columns[codart]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_desmar]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_desmar"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MARCA]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desmar]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_destip]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_destip"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPO]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_destip]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_desfam]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_desfam"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FAMILIA]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desfam]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_deslin]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_deslin"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LINEA]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_deslin]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_talart]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DC_talart"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TALLA]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_talart]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_desart]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_desart"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESCRIPCION]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desart]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_desubi]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_desubi"
+                      externalMetadataColumnId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UBICACION]"
+                      lineageId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output].Columns[DC_desubi]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODART]"
+                      dataType="i4"
+                      name="CODART" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_PRODUCTO]"
+                      dataType="i4"
+                      name="SK_PRODUCTO" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[MARCA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="MARCA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="TIPO" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FAMILIA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="FAMILIA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[LINEA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="LINEA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TALLA]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="TALLA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DESCRIPCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="250"
+                      name="DESCRIPCION" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[UBICACION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="25"
+                      name="UBICACION" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PRODUCTO\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PRODUCTO\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar D_PRODUCTO.Paths[ADO NET Source Output]"
+              endId="Package\Cargar D_PRODUCTO\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Cargar D_PRODUCTO\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Cargar D_PRODUCTO.Paths[Data Conversion Output]"
+              endId="Package\Cargar D_PRODUCTO\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Cargar D_PRODUCTO\Data Conversion.Outputs[Data Conversion Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Cargar D_PROVEEDOR"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{E6DCCAA1-8741-41CF-9CE4-83EB70A29C96}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Cargar D_PROVEEDOR"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Cargar D_PROVEEDOR\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    codpro,
+    nompro,
+    dirpro,
+    rucpro,
+    telpro
+FROM maeprov;</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  connectionManagerRefId="Package.ConnectionManagers[192.168.0.3.bdkdosh2018.root]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]"
+                      dataType="ui4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codpro]"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]"
+                      name="codpro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[nompro]"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]"
+                      name="nompro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dirpro]"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]"
+                      name="dirpro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[rucpro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[rucpro]"
+                      length="11"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[rucpro]"
+                      name="rucpro"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[telpro]"
+                      length="20"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]"
+                      name="telpro"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[codpro]"
+                      dataType="ui4"
+                      name="codpro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[nompro]"
+                      dataType="wstr"
+                      length="100"
+                      name="nompro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[dirpro]"
+                      dataType="wstr"
+                      length="100"
+                      name="dirpro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[rucpro]"
+                      dataType="wstr"
+                      length="11"
+                      name="rucpro" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[telpro]"
+                      dataType="wstr"
+                      length="20"
+                      name="telpro" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codpro]"
+                      dataType="ui4"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codpro]"
+                      name="codpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[nompro]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[nompro]"
+                      name="nompro" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dirpro]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[dirpro]"
+                      name="dirpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[rucpro]"
+                      dataType="wstr"
+                      length="11"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[rucpro]"
+                      name="rucpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[telpro]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[telpro]"
+                      name="telpro" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_PROVEEDOR\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input].Columns[nompro]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="nompro"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input].Columns[dirpro]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="dirpro"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input].Columns[rucpro]"
+                      cachedDataType="wstr"
+                      cachedLength="11"
+                      cachedName="rucpro"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[rucpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input].Columns[telpro]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="telpro"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]"
+                      name="DC_nompro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[nompro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]"
+                      name="DC_dirpro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[dirpro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_rucpro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="11"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_rucpro]"
+                      name="DC_rucpro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[rucpro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="20"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]"
+                      name="DC_telpro"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[telpro]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Cargar D_PROVEEDOR\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[D_PROVEEDOR]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  connectionManagerRefId="Package.ConnectionManagers[localhost.KDOSH_STAGE]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[codpro]"
+                      cachedDataType="ui4"
+                      cachedName="codpro"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODPRO]"
+                      lineageId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output].Columns[codpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_nompro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_nompro"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RAZON_SOCIAL]"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_nompro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_dirpro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="DC_dirpro"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIRECCION]"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_dirpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_rucpro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="11"
+                      cachedName="DC_rucpro"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RUC]"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_rucpro]" />
+                    <inputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_telpro]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="DC_telpro"
+                      externalMetadataColumnId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TELEFONO]"
+                      lineageId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output].Columns[DC_telpro]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CODPRO]"
+                      dataType="i4"
+                      name="CODPRO" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_PROVEEDOR]"
+                      dataType="i4"
+                      name="SK_PROVEEDOR" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RAZON_SOCIAL]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="RAZON_SOCIAL" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[DIRECCION]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="DIRECCION" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[RUC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="RUC" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TELEFONO]"
+                      codePage="1252"
+                      dataType="str"
+                      length="15"
+                      name="TELEFONO" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Cargar D_PROVEEDOR.Paths[ADO NET Source Output]"
+              endId="Package\Cargar D_PROVEEDOR\Data Conversion.Inputs[Data Conversion Input]"
+              name="ADO NET Source Output"
+              startId="Package\Cargar D_PROVEEDOR\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Cargar D_PROVEEDOR.Paths[Data Conversion Output]"
+              endId="Package\Cargar D_PROVEEDOR\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Cargar D_PROVEEDOR\Data Conversion.Outputs[Data Conversion Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5F2A4D37-748E-4970-8178-C93E43903F52}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F225B40E-F401-4CEA-BB5D-F2A030426F89}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE TIPMOV&#xA;TRUNCATE TABLE D_PROVEEDOR&#xA;TRUNCATE TABLE D_CLIENTE&#xA;TRUNCATE TABLE D_PRODUCTO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{452A7BF8-F824-42BD-9383-BFC9CFD6B693}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Cargar - TIPMOV" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{B905C4F4-B0B3-4F5D-9576-5BED3CE87998}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Cargar D_CLIENTE" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{897D718D-1636-4852-ABCF-CB20A4233F10}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Cargar D_PROVEEDOR" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{A3F627C7-8210-49B6-B6D5-8B1DDE2E3577}"
+      DTS:From="Package\Execute SQL Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Cargar D_PRODUCTO" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="159,42"
+          Id="Package\Cargar - TIPMOV"
+          TopLeft="137,146" />
+        <NodeLayout
+          Size="168,42"
+          Id="Package\Cargar D_CLIENTE"
+          TopLeft="333,148" />
+        <NodeLayout
+          Size="181,42"
+          Id="Package\Cargar D_PRODUCTO"
+          TopLeft="786,149" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Cargar D_PROVEEDOR"
+          TopLeft="561,151" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Execute SQL Task"
+          TopLeft="484,27" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="519,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-302.5,77"
+              Start="0,0"
+              End="-302.5,69.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,19.1330472103004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.1330472103004"
+                    Point2="0,23.1330472103004"
+                    Point3="-4,23.1330472103004" />
+                  <mssgle:LineSegment
+                    End="-298.5,23.1330472103004" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-298.5,23.1330472103004"
+                    Point2="-302.5,23.1330472103004"
+                    Point3="-302.5,27.1330472103004" />
+                  <mssgle:LineSegment
+                    End="-302.5,69.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="550,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-133,79"
+              Start="0,0"
+              End="-133,71.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.3491525423729" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.3491525423729"
+                    Point2="0,35.3491525423729"
+                    Point3="-4,35.3491525423729" />
+                  <mssgle:LineSegment
+                    End="-129,35.3491525423729" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-129,35.3491525423729"
+                    Point2="-133,35.3491525423729"
+                    Point3="-133,39.3491525423729" />
+                  <mssgle:LineSegment
+                    End="-133,71.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="581,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="73,82"
+              Start="0,0"
+              End="73,74.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.6915254237288" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.6915254237288"
+                    Point2="0,36.6915254237288"
+                    Point3="4,36.6915254237288" />
+                  <mssgle:LineSegment
+                    End="69,36.6915254237288" />
+                  <mssgle:CubicBezierSegment
+                    Point1="69,36.6915254237288"
+                    Point2="73,36.6915254237288"
+                    Point3="73,40.6915254237288" />
+                  <mssgle:LineSegment
+                    End="73,74.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="612,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="264.5,80"
+              Start="0,0"
+              End="264.5,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.0343347639485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.0343347639485"
+                    Point2="0,24.0343347639485"
+                    Point3="4,24.0343347639485" />
+                  <mssgle:LineSegment
+                    End="260.5,24.0343347639485" />
+                  <mssgle:CubicBezierSegment
+                    Point1="260.5,24.0343347639485"
+                    Point2="264.5,24.0343347639485"
+                    Point3="264.5,28.0343347639485" />
+                  <mssgle:LineSegment
+                    End="264.5,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Cargar - TIPMOV">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar - TIPMOV\ADO NET Source"
+          TopLeft="392,52" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar - TIPMOV\OLE DB Destination"
+          TopLeft="379,269" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Cargar - TIPMOV\Data Conversion"
+          TopLeft="392,123" />
+        <EdgeLayout
+          Id="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
+          TopLeft="470.5,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Cargar - TIPMOV\Derived Column"
+          TopLeft="395,195" />
+        <EdgeLayout
+          Id="Package\Cargar - TIPMOV.Paths[Data Conversion Output]"
+          TopLeft="471,165">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar - TIPMOV.Paths[Derived Column Output]"
+          TopLeft="468.25,237">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32"
+              Start="0,0"
+              End="0,24.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,24.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar - TIPMOV\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar - TIPMOV\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Cargar D_CLIENTE">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar D_CLIENTE\ADO NET Source"
+          TopLeft="332,45" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar D_CLIENTE\OLE DB Destination"
+          TopLeft="324.5,237.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Cargar D_CLIENTE\Data Conversion"
+          TopLeft="328,139" />
+        <EdgeLayout
+          Id="Package\Cargar D_CLIENTE.Paths[ADO NET Source Output]"
+          TopLeft="408.5,87">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,52"
+              Start="0,0"
+              End="0,44.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar D_CLIENTE.Paths[Data Conversion Output]"
+          TopLeft="408,181">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.5"
+              Start="0,0"
+              End="0,49">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Cargar D_PRODUCTO">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar D_PRODUCTO\ADO NET Source"
+          TopLeft="410,32" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Cargar D_PRODUCTO\Data Conversion"
+          TopLeft="417,134" />
+        <EdgeLayout
+          Id="Package\Cargar D_PRODUCTO.Paths[ADO NET Source Output]"
+          TopLeft="492,74">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar D_PRODUCTO\OLE DB Destination"
+          TopLeft="407,240" />
+        <EdgeLayout
+          Id="Package\Cargar D_PRODUCTO.Paths[Data Conversion Output]"
+          TopLeft="493.75,176">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64"
+              Start="0,0"
+              End="0,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Cargar D_PROVEEDOR">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Cargar D_PROVEEDOR\ADO NET Source"
+          TopLeft="360,54" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Cargar D_PROVEEDOR\Data Conversion"
+          TopLeft="359,154" />
+        <EdgeLayout
+          Id="Package\Cargar D_PROVEEDOR.Paths[ADO NET Source Output]"
+          TopLeft="438,96">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Cargar D_PROVEEDOR\OLE DB Destination"
+          TopLeft="347,276" />
+        <EdgeLayout
+          Id="Package\Cargar D_PROVEEDOR.Paths[Data Conversion Output]"
+          TopLeft="434.75,196">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,80"
+              Start="0,0"
+              End="0,72.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,72.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_CLIENTE\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_CLIENTE\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_PROVEEDOR\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_PROVEEDOR\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_PRODUCTO\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar D_PRODUCTO\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
