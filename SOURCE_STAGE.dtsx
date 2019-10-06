@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="SOURCE_STAGE"
   DTS:PackageType="5"
-  DTS:VersionBuild="49"
-  DTS:VersionGUID="{F67F86A2-B690-455A-825B-25843D677EA0}">
+  DTS:VersionBuild="52"
+  DTS:VersionGUID="{C8C9A652-5F3E-426B-9094-167023969462}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -23,11 +23,11 @@
       DTS:ObjectName="192.168.0.3.bdkdosh2018.root SOURCE">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="server=192.168.0.3;user id=root;port=2011;database=bdkdosh2018;">
+          DTS:ConnectionString="server=192.168.0.3;user id=root;port=2011;database=bdkdosh2019;">
           <DTS:Password
             DTS:Name="password"
             Sensitive="1"
-            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6RqvxJAPakaEdM3YckaClAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAC7DYTdxpLoK4WNFMFJOMzjyGKVROVQGmgFe1/w1P/5QwAAAAAOgAAAAAIAACAAAADHCOUVlepZMztkcs3wQgfgFLOVYCR1UcUSNbz264thFRAAAABrvmjWVwxj4bkVDJyBNTTeQAAAAIZoUootoAM3hVDst6caiSMAuT742hlIvFjABVby7Eu+mPzdGxj52Ul+oMk2n8vZWDntjHb6wgLhz1JcK2C4WgU</DTS:Password>
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA6RqvxJAPakaEdM3YckaClAAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAAAtMY7b8HdkvhwvROS3No9noEdENycC3SMe/pgYHrRzWAAAAAAOgAAAAAIAACAAAADYbra/WoSuhEm/UA4W22wwZ3Tz6Pw1YN+jOjz2E+6IIhAAAAA/4TflbUnmWc/LW/O2AkVCQAAAAMRk1KrWKX7zVRTgwgSwjSQ/Qj7mWKEmq8GxBHQ3QZvKWlvGaGpyiKU3X//WbsTDbDaF5R5swuiZa0qpOQlZrYU</DTS:Password>
         </DTS:ConnectionManager>
       </DTS:ObjectData>
     </DTS:ConnectionManager>
@@ -75,8 +75,10 @@
                   UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
     codart,
     codper,
-    numdoc,
     tipmov,
+    tipdoc,
+    serdoc,
+    numdoc,
     fecdoc,
     (YEAR(fecdoc) * 10000 + MONTH(fecdoc) * 100 + DAY(fecdoc)) AS 'SK_FECHA',
     hordoc,
@@ -143,16 +145,6 @@ ORDER BY codart</property>
                       name="codper"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
-                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
-                      dataType="wstr"
-                      errorOrTruncationOperation="Conversion"
-                      errorRowDisposition="FailComponent"
-                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
-                      length="10"
-                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
-                      name="numdoc"
-                      truncationRowDisposition="FailComponent" />
-                    <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]"
                       dataType="wstr"
                       errorOrTruncationOperation="Conversion"
@@ -161,6 +153,36 @@ ORDER BY codart</property>
                       length="1"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]"
                       name="tipmov"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipdoc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[tipdoc]"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipdoc]"
+                      name="tipdoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[serdoc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[serdoc]"
+                      length="6"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[serdoc]"
+                      name="serdoc"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
+                      length="10"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]"
+                      name="numdoc"
                       truncationRowDisposition="FailComponent" />
                     <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[fecdoc]"
@@ -244,15 +266,25 @@ ORDER BY codart</property>
                       dataType="i8"
                       name="codper" />
                     <externalMetadataColumn
-                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
-                      dataType="wstr"
-                      length="10"
-                      name="numdoc" />
-                    <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[tipmov]"
                       dataType="wstr"
                       length="1"
                       name="tipmov" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[tipdoc]"
+                      dataType="wstr"
+                      length="1"
+                      name="tipdoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[serdoc]"
+                      dataType="wstr"
+                      length="6"
+                      name="serdoc" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[numdoc]"
+                      dataType="wstr"
+                      length="10"
+                      name="numdoc" />
                     <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[fecdoc]"
                       dataType="dbTimeStamp"
@@ -306,17 +338,29 @@ ORDER BY codart</property>
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[codper]"
                       name="codper" />
                     <outputColumn
-                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
-                      dataType="wstr"
-                      length="10"
-                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
-                      name="numdoc" />
-                    <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipmov]"
                       dataType="wstr"
                       length="1"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipmov]"
                       name="tipmov" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipdoc]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[tipdoc]"
+                      name="tipdoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[serdoc]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[serdoc]"
+                      name="serdoc" />
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[numdoc]"
+                      name="numdoc" />
                     <outputColumn
                       refId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[fecdoc]"
                       dataType="dbTimeStamp"
@@ -394,6 +438,24 @@ ORDER BY codart</property>
                       cachedLength="1"
                       cachedName="tipmov"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input].Columns[tipdoc]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="tipdoc"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input].Columns[serdoc]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="serdoc"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[serdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Inputs[Data Conversion Input].Columns[numdoc]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="numdoc"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]" />
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
@@ -421,6 +483,72 @@ ORDER BY codart</property>
                           dataType="System.Int32"
                           description="Specifies the input column used as the source of data for the conversion."
                           name="SourceInputColumnLineageID">#{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipmov]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipdoc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="1"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipdoc]"
+                      name="DC_tipdoc"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[tipdoc]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_serdoc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="6"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_serdoc]"
+                      name="DC_serdoc"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[serdoc]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_numdoc]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_numdoc]"
+                      name="DC_numdoc"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[numdoc]}</property>
                         <property
                           dataType="System.Boolean"
                           description="Indicates whether the column uses the faster, locale-neutral parsing routines."
@@ -640,22 +768,6 @@ ORDER BY codart</property>
                       externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[HORA]"
                       lineageId="Package\Cargar - TIPMOV\Derived Column.Outputs[Derived Column Output].Columns[DC_hordoc]" />
                     <inputColumn
-                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[preart]"
-                      cachedDataType="numeric"
-                      cachedName="preart"
-                      cachedPrecision="8"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_COSTO]"
-                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]" />
-                    <inputColumn
-                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[totart]"
-                      cachedDataType="numeric"
-                      cachedName="totart"
-                      cachedPrecision="8"
-                      cachedScale="2"
-                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_VENTA]"
-                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[totart]" />
-                    <inputColumn
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[canart]"
                       cachedDataType="numeric"
                       cachedName="canart"
@@ -675,6 +787,46 @@ ORDER BY codart</property>
                       cachedPrecision="9"
                       externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_HORA]"
                       lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[SK_HORA]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_tipdoc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="DC_tipdoc"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPDOC]"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_tipdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_serdoc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="6"
+                      cachedName="DC_serdoc"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SERDOC]"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_serdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DC_numdoc]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="10"
+                      cachedName="DC_numdoc"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NUMDOC]"
+                      lineageId="Package\Cargar - TIPMOV\Data Conversion.Outputs[Data Conversion Output].Columns[DC_numdoc]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[preart]"
+                      cachedDataType="numeric"
+                      cachedName="preart"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PREART]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[preart]" />
+                    <inputColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[totart]"
+                      cachedDataType="numeric"
+                      cachedName="totart"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TOTART]"
+                      lineageId="Package\Cargar - TIPMOV\ADO NET Source.Outputs[ADO NET Source Output].Columns[totart]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -690,7 +842,7 @@ ORDER BY codart</property>
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPMOV]"
                       codePage="1252"
                       dataType="str"
-                      length="5"
+                      length="1"
                       name="TIPMOV" />
                     <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[FECHA]"
@@ -701,18 +853,6 @@ ORDER BY codart</property>
                       dataType="dbTime2"
                       name="HORA"
                       scale="7" />
-                    <externalMetadataColumn
-                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_COSTO]"
-                      dataType="numeric"
-                      name="PRECIO_COSTO"
-                      precision="8"
-                      scale="2" />
-                    <externalMetadataColumn
-                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRECIO_VENTA]"
-                      dataType="numeric"
-                      name="PRECIO_VENTA"
-                      precision="8"
-                      scale="2" />
                     <externalMetadataColumn
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CANART]"
                       dataType="i4"
@@ -725,6 +865,36 @@ ORDER BY codart</property>
                       refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SK_HORA]"
                       dataType="i4"
                       name="SK_HORA" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TIPDOC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="TIPDOC" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[SERDOC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="6"
+                      name="SERDOC" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NUMDOC]"
+                      codePage="1252"
+                      dataType="str"
+                      length="10"
+                      name="NUMDOC" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PREART]"
+                      dataType="numeric"
+                      name="PREART"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar - TIPMOV\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[TOTART]"
+                      dataType="numeric"
+                      name="TOTART"
+                      precision="8"
+                      scale="2" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -2860,13 +3030,35 @@ FROM maeprov;</property>
           Id="Package\Cargar - TIPMOV\OLE DB Destination"
           TopLeft="384,269" />
         <NodeLayout
-          Size="154,42"
-          Id="Package\Cargar - TIPMOV\Derived Column"
-          TopLeft="395,195" />
-        <NodeLayout
           Size="158,42"
           Id="Package\Cargar - TIPMOV\ADO NET Source"
           TopLeft="392,52" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Cargar - TIPMOV\Derived Column"
+          TopLeft="395,195" />
+        <EdgeLayout
+          Id="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
+          TopLeft="470.5,94">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Cargar - TIPMOV.Paths[Derived Column Output]"
           TopLeft="470.75,237">
@@ -2903,28 +3095,6 @@ FROM maeprov;</property>
                   Capacity="5">
                   <mssgle:LineSegment
                     End="0,22.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Cargar - TIPMOV.Paths[ADO NET Source Output]"
-          TopLeft="470.5,94">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,29"
-              Start="0,0"
-              End="0,21.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,21.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -3050,7 +3220,7 @@ FROM maeprov;</property>
     design-time-name="Package\Cargar D_PRODUCTO">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="171,42"
           Id="Package\Cargar D_PRODUCTO\OLE DB Destination"
@@ -3082,7 +3252,9 @@ FROM maeprov;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -3104,7 +3276,9 @@ FROM maeprov;</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
